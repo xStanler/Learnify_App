@@ -12,6 +12,14 @@ struct LearnifyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            ZStack(alignment: .bottom) {
+                Menu().zIndex(-5)
+            }
         }
     }
+}
+
+#Preview {
+    ContentView()
+    Menu()
 }
