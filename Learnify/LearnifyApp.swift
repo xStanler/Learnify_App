@@ -11,15 +11,11 @@ import SwiftUI
 struct LearnifyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
-            ZStack(alignment: .bottom) {
-                Menu().zIndex(-5)
-            }
+            MainPage()
         }
     }
 }
 
 #Preview {
-    ContentView()
-    Menu()
+    MainPage()
 }
