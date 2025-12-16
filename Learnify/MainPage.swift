@@ -34,23 +34,27 @@ struct MainPage: View {
                     }
                     .frame(width: parentWidth, height: 0.2*parentHeight)
                     
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .fill(Color(red: 60/255, green: 60/255, blue: 60/255))
-                            .frame(width: 0.75*parentWidth, height: 0.15*parentHeight)
-                            .shadow(color: Color.black.opacity(0.25), radius: 1, x: 0, y: 0.01*parentHeight)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                    .stroke(Color(red: 31/255, green: 31/255, blue: 31/255), lineWidth: 4)
-                            )
-                        
-                        Text("French")
-                            .font(Font.largeTitle.bold())
-                            .foregroundStyle(Color(red: 222/255, green: 222/255, blue: 222/255))
+                    ForEach(0..<5, id: \.self){ i in
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                .fill(Color(red: 60/255, green: 60/255, blue: 60/255))
+                                .frame(width: 0.75*parentWidth, height: 0.15*parentHeight)
+                                .shadow(color: Color.black.opacity(0.25), radius: 1, x: 0, y: 0.01*parentHeight)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                        .stroke(Color(red: 31/255, green: 31/255, blue: 31/255), lineWidth: 4)
+                                )
+                                .padding(.bottom, 12)
+                            
+                            Text("French")
+                                .font(Font.largeTitle.bold())
+                                .foregroundStyle(Color(red: 222/255, green: 222/255, blue: 222/255))
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .top)
+                    .padding(.horizontal, 20)
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            }
         }
         
     }
