@@ -11,11 +11,11 @@ import SwiftUI
 struct LearnifyApp: App {
     var body: some Scene {
         WindowGroup {
-            MainPage()
+            rootPage()
         }
     }
 }
 
 #Preview {
-    MainPage()
+    rootPage()
 }
