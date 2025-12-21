@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AboutPage: View {
-    
+    @Binding var selectedPage: Int
+
     var body: some View {
         GeometryReader { proxy in
             let parentWidth = proxy.size.width
@@ -58,14 +59,39 @@ struct AboutPage: View {
                         }
                     }
                     
-                    Spacer(minLength: 0.1 * parentHeight)
+                    Spacer(minLength: 0.2 * parentHeight)
                 }
+            }
+            .overlay(alignment: .bottomTrailing) {
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .fill(Color(red: 60/255, green: 60/255, blue: 60/255))
+                    .frame(width: 105, height: 105)
+                    .shadow(color: Color.black.opacity(0.25), radius: 1, x: 0, y: 0.01*parentHeight)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .stroke(Color(red:31/255, green: 31/255, blue: 31/255), lineWidth: 6)
+                            .overlay(
+                                Image(systemName: "arrow.right")
+                                    .font(.system(size: 24, weight: .black))
+                                    .foregroundStyle(Color(red: 117/255, green: 185/255, blue: 190/255))
+                            )
+                    )
+                    .padding(.trailing, 25)
+                    .onTapGesture {
+                        selectedPage = 0
+                    }
             }
         }
         
     }
 }
 
+extension AboutPage {
+    init(previewSelected initial: Int = 0) {
+        self._selectedPage = .constant(initial)
+    }
+}
+
 #Preview {
-    AboutPage()
+    AboutPage(previewSelected: 0)
 }
