@@ -195,6 +195,9 @@
 			);
 			mainGroup = 0AA8BC782EA26EFB00DE12BA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0A81EEED2EF9EC2100E9582A /* XCLocalSwiftPackageReference "../../Swift/SQLite.swift-master" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0AA8BC822EA26EFB00DE12BA /* Products */;
 			projectDirPath = "";
@@ -552,6 +555,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		0A81EEED2EF9EC2100E9582A /* XCLocalSwiftPackageReference "../../Swift/SQLite.swift-master" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../Swift/SQLite.swift-master";
+		};
+/* End XCLocalSwiftPackageReference section */
 	};
 	rootObject = 0AA8BC792EA26EFB00DE12BA /* Project object */;
 }
