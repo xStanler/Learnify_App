@@ -13,6 +13,8 @@ enum Database {
         do {
             let dbURL = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
                 .first!
+            
+            print(dbURL)
 
             let db = try Connection("\(dbURL)/languages.sqlite")
             try migrate(on: db)
@@ -63,4 +65,37 @@ enum Database {
     }
 }
 
-let db = Database.connection
+extension Database {
+    struct LanguageRow {
+        let id: Int64
+        let name: String
+        let numberOfLessons: Int64
+    }
+    
+    static func fetchLanguages() throws -> [LanguageRow] {
+        let db = connection
+        var result: [LanguageRow] = []
+        
+        for row in try db.prepare(Schema.languages) {
+            let id = row[Schema.language_id]
+            let name = row[Schema.language_name]
+            let numberOfLessons = row[Schema.language_id]
+            
+            result.append(LanguageRow(id: id, name: name, numberOfLessons: numberOfLessons))
+        }
+        
+        return result
+    }
+}
+
+extension Database {
+    @discardableResult
+    static func insertLanguage(name: String, numberOfLessons: Int64 = 0) throws -> Int64 {
+        let insert = Schema.languages.insert(
+            Schema.language_name <- name,
+            Schema.number_of_lessons <- numberOfLessons
+        )
+        
+        return try connection.run(insert)
+    }
+}

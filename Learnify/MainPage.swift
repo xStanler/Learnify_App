@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-let languages2 = ["French", "German", "Polish", "Italian", "Spanish", "Dutch", "Portuguese", "Russian", "Arabic", "Japanese"]
+let db = Database.connection
 
 struct MainPage: View {
     @Binding var selectedPage: Int
+    @StateObject private var viewModel = MainPageViewModel()
     
     var body: some View {
         GeometryReader { proxy in
@@ -39,7 +40,7 @@ struct MainPage: View {
                     
                     ScrollView {
                         VStack {
-                            ForEach(languages2, id: \.self) { language in
+                            ForEach(viewModel.languages, id: \.id) { row in
                                 RoundedRectangle(cornerRadius: 20, style: .continuous)
                                     .fill(Color(red: 60/255, green: 60/255, blue: 60/255))
                                     .frame(width: 0.75*parentWidth, height: 0.15*parentHeight)
@@ -48,18 +49,36 @@ struct MainPage: View {
                                         RoundedRectangle(cornerRadius: 20, style: .continuous)
                                             .stroke(Color(red: 31/255, green: 31/255, blue: 31/255), lineWidth: 4)
                                             .overlay(
-                                                Text(language)
+                                                Text(row.name)
                                                     .font(Font.largeTitle.bold())
                                                     .foregroundStyle(Color(red: 222/255, green: 222/255, blue: 222/255))
                                             )
                                     )
                                     .padding(.bottom, 12)
                             }
+                            
+                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                .fill(Color(red: 60/255, green: 60/255, blue: 60/255))
+                                .frame(width: 0.75*parentWidth, height: 0.15*parentHeight)
+                                .shadow(color: Color.black.opacity(0.25), radius: 1, x: 0, y: 0.01*parentHeight)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                        .stroke(Color(red: 31/255, green: 31/255, blue: 31/255), lineWidth: 4)
+                                        .overlay(
+                                            Text("+")
+                                                .font(Font.largeTitle.bold())
+                                                .foregroundStyle(Color(red: 222/255, green: 222/255, blue: 222/255))
+                                        )
+                                )
+                                .padding(.bottom, 12)
                         }
                         .frame(maxWidth: .infinity, alignment: .top)
                         .padding(.horizontal, 20)
                         
                         
+                    }
+                    .onAppear() {
+                        self.viewModel.load()
                     }
                 }
                 .overlay(alignment: .bottomLeading) {
