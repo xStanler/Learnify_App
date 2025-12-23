@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let languages = ["French", "German", "Polish", "Italian", "Spanish", "Dutch", "Portuguese", "Russian", "Arabic", "Japanese"]
+let languages2 = ["French", "German", "Polish", "Italian", "Spanish", "Dutch", "Portuguese", "Russian", "Arabic", "Japanese"]
 
 struct MainPage: View {
     @Binding var selectedPage: Int
@@ -39,7 +39,7 @@ struct MainPage: View {
                     
                     ScrollView {
                         VStack {
-                            ForEach(languages, id: \.self) { language in
+                            ForEach(languages2, id: \.self) { language in
                                 RoundedRectangle(cornerRadius: 20, style: .continuous)
                                     .fill(Color(red: 60/255, green: 60/255, blue: 60/255))
                                     .frame(width: 0.75*parentWidth, height: 0.15*parentHeight)
