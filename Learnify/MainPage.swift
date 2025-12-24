@@ -82,7 +82,7 @@ struct MainPage: View {
                     }
                 }
                 .overlay(alignment: .bottomLeading) {
-                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    RoundedRectangle(cornerRadius: 30, style: .continuous)
                         .fill(Color(red: 60/255, green: 60/255, blue: 60/255))
                         .frame(width: 105, height: 105)
                         .shadow(color: Color.black.opacity(0.25), radius: 1, x: 0, y: 0.01*parentHeight)
@@ -113,4 +113,5 @@ extension MainPage {
 
 #Preview {
     MainPage(previewSelected: 0)
+        .environmentObject(MainPageViewModel())
 }

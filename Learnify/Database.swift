@@ -69,7 +69,7 @@ extension Database {
     struct LanguageRow {
         let id: Int64
         let name: String
-        let numberOfLessons: Int64
+        //let numberOfLessons: Int64
     }
     
     static func fetchLanguages() throws -> [LanguageRow] {
@@ -79,9 +79,9 @@ extension Database {
         for row in try db.prepare(Schema.languages) {
             let id = row[Schema.language_id]
             let name = row[Schema.language_name]
-            let numberOfLessons = row[Schema.language_id]
+            //let numberOfLessons = row[Schema.language_id]
             
-            result.append(LanguageRow(id: id, name: name, numberOfLessons: numberOfLessons))
+            result.append(LanguageRow(id: id, name: name, /*numberOfLessons: numberOfLessons*/))
         }
         
         return result
