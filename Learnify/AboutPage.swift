@@ -16,19 +16,19 @@ struct AboutPage: View {
             let parentHeight = proxy.size.height
             
             ZStack {
-                background_color
+                Colors.background_color
                 .ignoresSafeArea(edges: .all)
                 
                 VStack(alignment: .center) {
                     ZStack {
                         Rectangle()
                             .frame(width: parentWidth, height: 0.2*parentHeight)
-                            .foregroundStyle(about_logo)
+                            .foregroundStyle(Colors.about_logo)
                             .ignoresSafeArea(edges: .top)
                             .overlay(
                                 Text("Learnify")
                                     .font(.system(size: 48, weight: .black))
-                                    .foregroundStyle(logo_color)
+                                    .foregroundStyle(Colors.logo_color)
                                     .offset(x: 0, y: -0.05*parentHeight)
                             )
                     }
@@ -38,23 +38,23 @@ struct AboutPage: View {
                     
                     ZStack(alignment: .center) {
                         RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .fill(card_background_primary)
+                            .fill(Colors.card_background_primary)
                             .frame(width: 0.75*parentWidth, height: 0.45*parentHeight)
                             .shadow(color: Color.black.opacity(0.25), radius: 1, x: 0, y: 0.01*parentHeight)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                    .stroke(border_primary, lineWidth: 4)
+                                    .stroke(Colors.border_primary, lineWidth: 4)
                             )
                             .padding(.bottom, 12)
                         
                         VStack {
                             Text("About")
                                 .font(Font.largeTitle.bold())
-                                .foregroundStyle(text_primary)
+                                .foregroundStyle(Colors.text_primary)
                                 .padding(.top, 20)
-                            Text("This app is made by student from AGH University of Science and Technology in Krakow. It is a simple app that helps you to learn new things. You can find more information about it on my [GitHub page](https://github.com/hmielewski/Learnify).")
+                            Text("This app is made by student from AGH University of Science and Technology in Krakow. It is a simple app that helps you learn new things. You can find more information about it on my [GitHub page](https://github.com/xStanler/Learnify_App.git).")
                                 .frame(width: 0.6*parentWidth)
-                                .foregroundStyle(text_primary)
+                                .foregroundStyle(Colors.text_primary)
                                 .padding(20)
                         }
                     }
@@ -64,16 +64,16 @@ struct AboutPage: View {
             }
             .overlay(alignment: .bottomTrailing) {
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
-                    .fill(card_background_primary)
+                    .fill(Colors.card_background_primary)
                     .frame(width: 105, height: 105)
                     .shadow(color: Color.black.opacity(0.25), radius: 1, x: 0, y: 0.01*parentHeight)
                     .overlay(
                         RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .stroke(border_primary, lineWidth: 6)
+                            .stroke(Colors.border_primary, lineWidth: 6)
                             .overlay(
                                 Image(systemName: "arrow.right")
                                     .font(.system(size: 24, weight: .black))
-                                    .foregroundStyle(main_logo)
+                                    .foregroundStyle(Colors.main_logo)
                             )
                     )
                     .padding(.trailing, 25)
