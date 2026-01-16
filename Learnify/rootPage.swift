@@ -19,7 +19,7 @@ struct rootPage: View {
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .ignoresSafeArea(edges: .all)
-        .background(Color(red: 47/255, green: 47/255, blue: 47/255))
+        .background(background_color)
     }
 }
 
