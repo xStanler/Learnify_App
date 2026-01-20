@@ -1,9 +1,14 @@
 # **Learnify App**
 
 **Welcome in Learnify App project.**      
-    It's simple app that solves my needs for learing new words / concepts. Someone may say that it looks and works similiar to Duoling, but that's not right. It generates lessons based by topic of choice. App takes chooses words/cards based on self-made validation algorithm and then checks users knowledge of current topic (Somthing like Aanki). Learnify© was made for people by people (one person to be exact).
+    It's simple app that solves my needs for learing new words / concepts. Someone may say that it looks and works similiar to Duoling, but that's not right. It generates lessons based by topic of choice. App takes chooses words/cards based on self-made validation algorithm and then checks users knowledge of current topic (Somthing like Aanki). Learnify was made for people by people (one person to be exact).
 
 Creator: *Stanisław Chmielewski*
+
+*Table of Contents*
+- [Technology Stack](#technology-stack)
+- [Project structure](#project-structure)
+- [FAQ](#faq)
 
 ## Technology Stack:
 ```
@@ -21,14 +26,14 @@ Creator: *Stanisław Chmielewski*
 ├── Learnify/
 │   ├── Assets.cassets /
 │   │   └── < xcode assets >
-│   ├── [AboutPage.swift][about-page]
-│   ├── AddLanguage.swift
-│   ├── Database.swift
-│   ├── LearnifyApp.swift
-│   ├── MainPage.swift
-│   ├── MainPageViewModel.swift
-│   ├── rootPage.swift
-│   └── variables.swift
+│   ├── AboutPage.swift         -> [about-page]
+│   ├── AddLanguage.swift       -> [add-language]
+│   ├── Database.swift          -> [database]
+│   ├── LearnifyApp.swift       -> [app]
+│   ├── MainPage.swift          -> [main-page]
+│   ├── MainPageViewModel.swift -> [main-viewModel]
+│   ├── rootPage.swift          -> [root-page]
+│   └── variables.swift         -> [variables]
 ├── LearnifyTests/
 │   └── < app functionality tests [ not public right now ] >
 ├── LearnifyUITest/
@@ -40,7 +45,21 @@ Creator: *Stanisław Chmielewski*
 └── README.md
 ```
 
-[about-page]: "This is about page."
+>:computer:[about-page]: Page with breif description of the app.
+
+>[add-language]: Page for adding new topic. 
+
+>[database]: Swift implementation of database, and tables with schemas.
+
+>[app]: Main app program. Renders program and calls app() function.
+
+>[main-page]: Main page of the app.
+
+>[main-viewModel]: Fetches db data to [main-page].
+
+>[root-page]: Implements sctructure of pages.
+
+>[variables]: File with global variables, eg. colors, functions.
 
 ## FAQ:
 
