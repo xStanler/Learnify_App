@@ -47,7 +47,7 @@ Creator: *Stanisław Chmielewski*
 
 :computer: **[about-page]**: *Page with breif description of the app.*
 <br/>
-<img src="https://github.com/xStanler/Learnify_App/blob/readme-feature/AboutPage.png" width=250/>
+<img src="https://github.com/xStanler/Learnify_App/blob/readme-feature/AboutPage.png" height=250/>
 
 :computer: **[add-language]**: *Page for adding new topic.*
 
