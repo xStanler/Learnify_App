@@ -45,21 +45,21 @@ Creator: *Stanisław Chmielewski*
 └── README.md
 ```
 
->:computer:[about-page]: Page with breif description of the app.
+:computer: [about-page]: Page with breif description of the app.
 
->[add-language]: Page for adding new topic. 
+:computer: [add-language]: Page for adding new topic. 
 
->[database]: Swift implementation of database, and tables with schemas.
+:computer: [database]: Swift implementation of database, and tables with schemas.
 
->[app]: Main app program. Renders program and calls app() function.
+:computer: [app]: Main app program. Renders program and calls app() function.
 
->[main-page]: Main page of the app.
+:computer: [main-page]: Main page of the app.
 
->[main-viewModel]: Fetches db data to [main-page].
+:computer: [main-viewModel]: Fetches db data to [main-page].
 
->[root-page]: Implements sctructure of pages.
+:computer: [root-page]: Implements sctructure of pages.
 
->[variables]: File with global variables, eg. colors, functions.
+:computer: [variables]: File with global variables, eg. colors, functions.
 
 ## FAQ:
 
