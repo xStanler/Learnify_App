@@ -47,11 +47,15 @@ Creator: *Stanisław Chmielewski*
 
 :computer: **[about-page]**: *Page with breif description of the app.*
 <br/>
+<center>
 <img src="https://github.com/xStanler/Learnify_App/blob/readme-feature/AboutPage.png" height=250/>
+<center/>
 
 :computer: **[add-language]**: *Page for adding new topic.*
 <br/>
+<center>
 <img src="https://github.com/xStanler/Learnify_App/blob/readme-feature/AddLanguage.png" height=250/>
+<center/>
 
 :computer: **[database]**: *Swift implementation of database, and tables with schemas.*
 
@@ -59,7 +63,9 @@ Creator: *Stanisław Chmielewski*
 
 :computer: **[main-page]**: *Main page of the app.*
 <br/>
+<center>
 <img src="https://github.com/xStanler/Learnify_App/blob/readme-feature/MainPage.png" height=250/>
+<center/>
 
 :computer: **[main-viewModel]**: *Fetches db data to [main-page].*
 
