@@ -14,6 +14,7 @@ Creator: *Stanisław Chmielewski*
 
 ## Project structure:
 
+```
 .
 ├── Learnify.xcodeproj/
 │   └── < xcode project files >
@@ -37,6 +38,7 @@ Creator: *Stanisław Chmielewski*
 ├── SQLite.xcodeproj/
 │   └── < SQLite package for Swift >
 └── README.md
+```
 
 [about-page]: "This is about page."
 
