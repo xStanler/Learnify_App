@@ -46,6 +46,7 @@ Creator: *Stanisław Chmielewski*
 ```
 
 :computer: **[about-page]**: *Page with breif description of the app.*
+[About Page](./AboutPage.png?raw=true)
 
 :computer: **[add-language]**: *Page for adding new topic.*
 
