@@ -14,29 +14,29 @@ Creator: *Stanisław Chmielewski*
 
 ## Project structure:
 
->.
->├── Learnify.xcodeproj/
->│   └── < xcode project files >
->├── Learnify/
->│   ├── Assets.cassets /
->│   │   └── < xcode assets >
->│   ├── [AboutPage.swift][about-page]
->│   ├── AddLanguage.swift
->│   ├── Database.swift
->│   ├── LearnifyApp.swift
->│   ├── MainPage.swift
->│   ├── MainPageViewModel.swift
->│   ├── rootPage.swift
->│   └── variables.swift
->├── LearnifyTests/
->│   └── < app functionality tests [ not public right now ] >
->├── LearnifyUITest/
->│   └── < app's UI tests [ not public right now] >
->├── SQLite 2.xcodeproj/
->│   └── < SQLite package for Swift >
->├── SQLite.xcodeproj/
->│   └── < SQLite package for Swift >
->└── README.md
+.
+├── Learnify.xcodeproj/
+│   └── < xcode project files >
+├── Learnify/
+│   ├── Assets.cassets /
+│   │   └── < xcode assets >
+│   ├── [AboutPage.swift][about-page]
+│   ├── AddLanguage.swift
+│   ├── Database.swift
+│   ├── LearnifyApp.swift
+│   ├── MainPage.swift
+│   ├── MainPageViewModel.swift
+│   ├── rootPage.swift
+│   └── variables.swift
+├── LearnifyTests/
+│   └── < app functionality tests [ not public right now ] >
+├── LearnifyUITest/
+│   └── < app's UI tests [ not public right now] >
+├── SQLite 2.xcodeproj/
+│   └── < SQLite package for Swift >
+├── SQLite.xcodeproj/
+│   └── < SQLite package for Swift >
+└── README.md
 
 [about-page]: "This is about page."
 
