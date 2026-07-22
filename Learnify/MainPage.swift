@@ -12,96 +12,155 @@ let db = Database.connection
 struct MainPage: View {
     @Binding var selectedPage: Int
     @StateObject private var viewModel = MainPageViewModel()
-    
+    @StateObject private var router = Router()
+    @State private var activePopupLanguage: Database.LanguageRow?
+    @State private var pressedLanguageId: Int64?
+
     var body: some View {
-        GeometryReader { proxy in
-            let parentWidth = proxy.size.width
-            let parentHeight = proxy.size.height
-            
-            ZStack {
-                Color(red: 47/255, green: 47/255, blue: 47/255)
-                    .ignoresSafeArea(edges: .all)
-                
-                VStack() {
-                    ZStack {
-                        Rectangle()
-                            .frame(width: parentWidth, height: 0.2*parentHeight)
-                            .foregroundStyle(Color(red: 117/255, green: 185/255, blue: 190/255))
-                            .ignoresSafeArea(edges: .top)
-                            .padding(.bottom, 0.05*parentHeight)
-                            .overlay(
-                            Text("Learnify")
-                                .font(.system(size: 48, weight: .black))
-                                .foregroundStyle(Color(red: 46/255, green: 64/255, blue: 87/255))
-                                .offset(x: 0, y: -0.05*parentHeight)
-                        )
-                    }
-                    .frame(width: parentWidth, height: 0.2*parentHeight)
-                    
-                    ScrollView {
-                        VStack {
-                            ForEach(viewModel.languages, id: \.id) { row in
-                                RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                    .fill(Color(red: 60/255, green: 60/255, blue: 60/255))
-                                    .frame(width: 0.75*parentWidth, height: 0.15*parentHeight)
-                                    .shadow(color: Color.black.opacity(0.25), radius: 1, x: 0, y: 0.01*parentHeight)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                            .stroke(Color(red: 31/255, green: 31/255, blue: 31/255), lineWidth: 4)
-                                            .overlay(
-                                                Text(row.name)
-                                                    .font(Font.largeTitle.bold())
-                                                    .foregroundStyle(Color(red: 222/255, green: 222/255, blue: 222/255))
-                                            )
-                                    )
-                                    .padding(.bottom, 12)
+        NavigationStack(path: $router.path) {
+            GeometryReader { proxy in
+                let parentWidth = proxy.size.width
+                let parentHeight = proxy.size.height
+
+                ZStack {
+                    Color.learnifyBackground
+                        .ignoresSafeArea(edges: .all)
+
+                    VStack {
+                        HeaderBanner(accentColor: .headerTeal, width: parentWidth, height: 0.2 * parentHeight)
+                            .frame(width: parentWidth, height: 0.2 * parentHeight)
+                            .padding(.bottom, 0.05 * parentHeight)
+                            .onLongPressGesture {
+                                router.push(.settings)
                             }
-                            
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .fill(Color(red: 60/255, green: 60/255, blue: 60/255))
-                                .frame(width: 0.75*parentWidth, height: 0.15*parentHeight)
-                                .shadow(color: Color.black.opacity(0.25), radius: 1, x: 0, y: 0.01*parentHeight)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                        .stroke(Color(red: 31/255, green: 31/255, blue: 31/255), lineWidth: 4)
-                                        .overlay(
-                                            Text("+")
-                                                .font(Font.largeTitle.bold())
-                                                .foregroundStyle(Color(red: 222/255, green: 222/255, blue: 222/255))
-                                        )
-                                )
-                                .padding(.bottom, 12)
+
+                        ScrollView {
+                            VStack {
+                                ForEach(viewModel.languages, id: \.id) { row in
+                                    languageTile(row, parentWidth: parentWidth, parentHeight: parentHeight)
+                                }
+
+                                addLanguageTile(parentWidth: parentWidth, parentHeight: parentHeight)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .top)
+                            .padding(.horizontal, 20)
                         }
-                        .frame(maxWidth: .infinity, alignment: .top)
-                        .padding(.horizontal, 20)
-                        
-                        
+                        .onAppear() {
+                            self.viewModel.load()
+                        }
                     }
-                    .onAppear() {
-                        self.viewModel.load()
+
+                    if let activePopupLanguage {
+                        LanguageActionsPopup(
+                            languageName: activePopupLanguage.name,
+                            onAddCard: {
+                                self.activePopupLanguage = nil
+                                router.push(.addCard(languageId: activePopupLanguage.id, languageName: activePopupLanguage.name))
+                            },
+                            onEditCards: {
+                                self.activePopupLanguage = nil
+                                router.push(.editLanguage(languageId: activePopupLanguage.id, languageName: activePopupLanguage.name))
+                            },
+                            onMegaLesson: {
+                                self.activePopupLanguage = nil
+                                router.push(.learning(.mega))
+                            },
+                            onDeleteLanguage: {
+                                self.activePopupLanguage = nil
+                                deleteLanguage(activePopupLanguage)
+                            },
+                            onDismiss: {
+                                self.activePopupLanguage = nil
+                            }
+                        )
                     }
                 }
-                .overlay(alignment: .bottomLeading) {
-                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .fill(Color(red: 60/255, green: 60/255, blue: 60/255))
-                        .frame(width: 105, height: 105)
-                        .shadow(color: Color.black.opacity(0.25), radius: 1, x: 0, y: 0.01*parentHeight)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                                .stroke(Color(red:31/255, green: 31/255, blue: 31/255), lineWidth: 6)
-                                .overlay(
-                                    Image(systemName: "arrow.left")
-                                        .font(.system(size: 24, weight: .black))
-                                        .foregroundStyle(Color(red: 247/255, green: 179/255, blue: 43/255, opacity: 0.75))
-                                )
-                        )
-                        .padding(.leading, 25)
-                        .onTapGesture {
-                            selectedPage = 1
-                        }
+            }
+            .toolbar(.hidden, for: .navigationBar)
+            .navigationDestination(for: Route.self) { route in
+                switch route {
+                case .addLanguage:
+                    AddLanguagePage()
+                case .editLanguage(let languageId, let languageName):
+                    EditLanguagePage(languageId: languageId, languageName: languageName)
+                case .addCard(let languageId, let languageName):
+                    AddCardPage(languageId: languageId, languageName: languageName)
+                case .learning(let scope):
+                    LearningPage(scope: scope)
+                case .settings:
+                    SettingsPage()
                 }
             }
         }
+        .environmentObject(router)
+    }
+
+    @ViewBuilder
+    private func languageTile(_ row: Database.LanguageRow, parentWidth: CGFloat, parentHeight: CGFloat) -> some View {
+        let isPressed = pressedLanguageId == row.id
+
+        RoundedRectangle(cornerRadius: 20, style: .continuous)
+            .fill(isPressed ? Color.cardSurfacePressed : Color.cardSurface)
+            .frame(width: 0.75*parentWidth, height: 0.15*parentHeight)
+            .shadow(color: Color.black.opacity(0.25), radius: 1, x: 0, y: 0.01*parentHeight)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .stroke(Color.cardBorder, lineWidth: 4)
+                    .overlay(
+                        Text(row.name)
+                            .font(Font.largeTitle.bold())
+                            .foregroundStyle(Color.primaryText)
+                    )
+            )
+            .padding(.bottom, 12)
+            .contentShape(Rectangle())
+            .animation(.easeOut(duration: 0.15), value: isPressed)
+            .onTapGesture {
+                router.push(.learning(.language(id: row.id, name: row.name)))
+            }
+            .onLongPressGesture(
+                minimumDuration: 0.5,
+                maximumDistance: 50,
+                perform: {
+                    activePopupLanguage = row
+                },
+                onPressingChanged: { pressing in
+                    pressedLanguageId = pressing ? row.id : nil
+                }
+            )
+    }
+
+    @ViewBuilder
+    private func addLanguageTile(parentWidth: CGFloat, parentHeight: CGFloat) -> some View {
+        RoundedRectangle(cornerRadius: 20, style: .continuous)
+            .fill(Color.cardSurface)
+            .frame(width: 0.75*parentWidth, height: 0.15*parentHeight)
+            .shadow(color: Color.black.opacity(0.25), radius: 1, x: 0, y: 0.01*parentHeight)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .stroke(Color.cardBorder, lineWidth: 4)
+                    .overlay(
+                        Text("+")
+                            .font(Font.largeTitle.bold())
+                            .foregroundStyle(Color.primaryText)
+                    )
+            )
+            .padding(.bottom, 12)
+            .onTapGesture {
+                router.push(.addLanguage)
+            }
+    }
+
+    private func deleteLanguage(_ language: Database.LanguageRow) {
+        if let words = try? Database.fetchWords(languageId: language.id) {
+            for word in words {
+                if let image = word.helpImage {
+                    ImageStore.delete(image)
+                }
+            }
+        }
+        try? Database.deleteLanguage(id: language.id)
+        viewModel.load()
     }
 }
 

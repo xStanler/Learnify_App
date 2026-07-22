@@ -13,12 +13,12 @@ final class MainPageViewModel: ObservableObject {
     
     func load() {
         do {
+            languages = try Database.fetchLanguages()
             if languages.isEmpty {
                 try Database.insertLanguage(name: "French")
                 try Database.insertLanguage(name: "Polish")
+                languages = try Database.fetchLanguages()
             }
-            languages = try Database.fetchLanguages()
-            
         } catch {
             errorMessage = "Failed to load languages: \(error)"
         }
